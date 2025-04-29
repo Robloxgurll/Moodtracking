@@ -9,7 +9,6 @@ This is a front-end web project focused on supporting mental well-being through 
 - **Home Page** – Welcome message and overview.
 - **About Us** – Learn more about the purpose of the site.
 - **Mood Tracker** – Allows users to log and reflect on their emotional state.
-- **Journal** – Provides a space to write and track thoughts daily.
 - **Self-Help Tools** – Tips and resources for emotional self-regulation.
 - **Resources Hub** – Curated links, hotlines, and external support.
 - **Success Stories** – Real-life testimonials for inspiration.
@@ -21,8 +20,6 @@ This is a front-end web project focused on supporting mental well-being through 
 
 - **HTML5**
 - **CSS3**
-- **JavaScript (Vanilla)**
-
 ---
 
 ## Project Status
@@ -34,5 +31,7 @@ This is a front-end web project focused on supporting mental well-being through 
 ## Students Involved in this project
 
 202211466 Ahmed Al Sayyed
-
+202220557 Mohammed ashraf tahayneh
+202412292 Joud Bassam Ruzieh 
+Abdulrahman Issa
 ---
