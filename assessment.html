@@ -2,27 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Assessment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Self-Assessment Tool</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <style>
-    .error {
-      color: red;
-      font-size: 0.9em;
+    .error-msg {
+      color: crimson;
+      font-size: 0.85rem;
     }
     body {
-      background-color: #f8f5f1;
+      background-color: #f0ece7;
     }
   </style>
 </head>
 <body>
+
+<!--Navigation bar + responsive design for mobile devices--> 
+
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="index.html">Project MoodTracker</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <a class="navbar-brand" href="index.html">MoodTracker Project</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="collapse navbar-collapse" id="navMenu">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="mood-tracker.html">Mood Tracker</a></li>
@@ -36,115 +39,160 @@
       </div>
     </div>
   </nav>
-
-  <div class="container mt-4">
-    <h2 class="text-center">Mental Health Self-Assessment</h2>
-    <p id="datetime" class="text-center text-muted"></p>
-    <form id="assessmentForm" novalidate>
+    <!--title for the thingy-->
+  <main class="container mt-5">
+    <header class="mb-4 text-center">
+      <h2>Mental Wellness Self-Evaluation</h2>
+      <p id="currentDateTime" class="text-muted"></p>
+    </header>
+    <!-- Form for self-assessment -->
+    <form id="selfEvalForm" novalidate>
       <div class="mb-3">
-        <label for="username" class="form-label">Name</label>
-        <input type="text" class="form-control" id="username" />
-        <span id="usernameError" class="error"></span>
+        <label for="fullName" class="form-label">Your Name</label>
+        <input type="text" id="fullName" class="form-control" />
+        <div id="nameError" class="error-msg"></div>
       </div>
 
+      <!-- Input for hours of sleep -->
       <div class="mb-3">
-        <label for="sleepHours" class="form-label">How many hours did you sleep last night?</label>
-        <input type="number" class="form-control" id="sleepHours" min="0" max="24" />
-        <span id="sleepHoursError" class="error"></span>
+        <label for="hoursSlept" class="form-label">Hours of Sleep Last Night</label>
+        <input type="number" id="hoursSlept" class="form-control" min="0" max="24" />
+        <div id="sleepError" class="error-msg"></div>
       </div>
 
+      <!-- Radio buttons for stress level -->
       <div class="mb-3">
-        <label class="form-label">Current stress level</label><br />
-        <div class="form-check form-check-inline">
-          <input type="radio" name="stress" value="low" class="form-check-input" />
-          <label class="form-check-label">Low</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input type="radio" name="stress" value="medium" class="form-check-input" />
-          <label class="form-check-label">Medium</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input type="radio" name="stress" value="high" class="form-check-input" />
-          <label class="form-check-label">High</label>
-        </div>
-        <br /><span id="stressError" class="error"></span>
-      </div>
+  <label class="form-label">Stress Level Right Now</label><br />
 
-      <div class="mb-3">
-        <label class="form-label">Select the emotions you’ve experienced today</label><br />
-        <div class="form-check">
-          <input type="checkbox" name="emotion" value="Happy" class="form-check-input" />
-          <label class="form-check-label">Happy</label>
-        </div>
-        <div class="form-check">
-          <input type="checkbox" name="emotion" value="Sad" class="form-check-input" />
-          <label class="form-check-label">Sad</label>
-        </div>
-        <div class="form-check">
-          <input type="checkbox" name="emotion" value="Anxious" class="form-check-input" />
-          <label class="form-check-label">Anxious</label>
-        </div>
-        <span id="emotionError" class="error"></span>
-      </div>
+  <input type="radio" id="stressLow" name="stressLevel" value="Low" />
+  <label for="stressLow">Low</label>
 
-      <div class="mb-3">
-        <label for="report" class="form-label">Your Personalized Wellness Report</label>
-        <textarea class="form-control" id="report" rows="6" readonly></textarea>
-      </div>
+  <input type="radio" id="stressMedium" name="stressLevel" value="Medium" />
+  <label for="stressMedium">Medium</label>
 
-      <button type="button" class="btn btn-primary" onclick="generateReport()">Submit Assessment</button>
-    </form>
+  <input type="radio" id="stressHigh" name="stressLevel" value="High" />
+  <label for="stressHigh">High</label>
+
+  <div id="stressError" class="error-msg"></div>
+</div>
+
+      <!-- Checkboxes for emotions felt today -->
+<div class="mb-3">
+  <label class="form-label">Emotions You’ve Felt Today (choose at least one)</label>
+
+  <div class="form-check">
+    <input type="checkbox" id="emotionHappy" name="emotions" value="Happy" class="form-check-input" />
+    <label for="emotionHappy" class="form-check-label">Happy</label>
   </div>
 
+  <div class="form-check">
+    <input type="checkbox" id="emotionSad" name="emotions" value="Sad" class="form-check-input" />
+    <label for="emotionSad" class="form-check-label">Sad</label>
+  </div>
+
+  <div class="form-check">
+    <input type="checkbox" id="emotionAnxious" name="emotions" value="Anxious" class="form-check-input" />
+    <label for="emotionAnxious" class="form-check-label">Anxious</label>
+  </div>
+
+  <div id="emotionError" class="error-msg mt-1"></div>
+</div>
+
+      <!-- A Section for personalized wellness summary -->
+      <section class="card mt-4">
+        <header class="card-header bg-secondary text-white">Personalized Wellness Summary</header>
+        <div class="card-body p-3">
+          <textarea id="wellnessSummary" class="form-control" rows="6" readonly></textarea>
+        </div>
+      </section>
+
+      <div class="d-flex justify-content-center mt-3">
+        <button type="button" class="btn btn-secondary" onclick="createSummary()">Submit</button>
+      </div>
+    </form>
+  </main>
+
+
   <script>
-    function updateDateTime() {
-      const now = new Date();
-      document.getElementById("datetime").textContent =
-        "Date: " + now.toDateString() + " | Time: " + now.toLocaleTimeString();
+    // Updates the current date and time every second
+    function refreshDateTime() {
+      var now = new Date();
+      var dateStr = "Today is " + now.toDateString() + " — Current time: " + now.toLocaleTimeString();
+      document.getElementById("currentDateTime").innerHTML = dateStr;
     }
-    setInterval(updateDateTime, 1000);
-    updateDateTime();
+    setInterval(refreshDateTime, 1000);
+    refreshDateTime();
 
-    function generateReport() {
-      let isValid = true;
-      const username = document.getElementById("username").value.trim();
-      const sleepHours = document.getElementById("sleepHours").value;
-      const stressLevel = document.querySelector('input[name="stress"]:checked');
-      const emotions = document.querySelectorAll('input[name="emotion"]:checked');
+    // Generates and displays the wellness summary report through 
+    function createSummary() {
+      let valid = true;
 
-      document.getElementById("usernameError").textContent =
-        username === "" ? "Please enter your name." : "";
-      document.getElementById("sleepHoursError").textContent =
-        sleepHours === "" || sleepHours < 0 || sleepHours > 24 ?
-        "Enter a valid number of sleep hours (0-24)." : "";
-      document.getElementById("stressError").textContent =
-        !stressLevel ? "Please select a stress level." : "";
-      document.getElementById("emotionError").textContent =
-        emotions.length === 0 ? "Select at least one emotion." : "";
+      // Collect form inputs
+       var nameInput = document.getElementById("fullName").value;
+       var sleepInput = document.getElementById("hoursSlept").value;
+       var selectedStress = document.querySelector('input[name="stressLevel"]:checked');
+       var selectedEmotions = document.querySelectorAll('input[name="emotions"]:checked');
 
-      if (!username || sleepHours === "" || sleepHours < 0 || sleepHours > 24 || !stressLevel || emotions.length === 0) {
-        return;
+
+      // Clear previous errors
+      document.getElementById("nameError").textContent = "";
+      document.getElementById("sleepError").textContent = "";
+      document.getElementById("stressError").textContent = "";
+      document.getElementById("emotionError").textContent = "";
+
+      // Validate name
+      if (!nameInput) {
+        document.getElementById("nameError").textContent = "Please provide your name.";
+        valid = false;
       }
 
-      let report = `Hello ${username},\n`;
-      report += `You slept ${sleepHours} hours last night.\n`;
-      report += `Your stress level is ${stressLevel.value}.\n`;
-      report += `You felt: ` + Array.from(emotions).map(e => e.value).join(", ") + `.\n`;
-
-      if (sleepHours < 5) {
-        report += "Consider improving your sleep routine.\n";
-      } else if (sleepHours > 9) {
-        report += "Long sleep can also be a sign of fatigue or burnout.\n";
-      } else {
-        report += "Your sleep duration looks healthy.\n";
+      // Validate sleep hours
+     if (sleepInput === "" || isNaN(sleepInput) || sleepInput < 0 || sleepInput > 24) {
+    document.getElementById("sleepError").innerHTML = "Please enter a number between 0 and 24.";
+    valid = false;
       }
 
-      if (stressLevel.value === "high") {
-        report += "Take breaks and consider breathing exercises.\n";
+      // Validate stress level
+    if (!selectedStress) {
+    document.getElementById("stressError").innerHTML = "Please select your current stress level.";
+    valid = false;
       }
 
-      document.getElementById("report").value = report;
-    }
+  // Validate emotions
+  if (selectedEmotions.length === 0) {
+    document.getElementById("emotionError").innerHTML = "Choose at least one emotion.";
+    valid = false;
+  }
+
+  if (!valid) {
+    return;
+  }
+
+  // Summary message
+  var summary = "Hi " + nameInput + ",\n";
+  summary += "You reported sleeping for " + sleepInput + " hours last night.\n";
+  summary += "Your stress level is currently: " + selectedStress.value + ".\n";
+
+  var emotionList = [];
+  for (var i = 0; i < selectedEmotions.length; i++) {
+    emotionList.push(selectedEmotions[i].value);
+  }
+  summary += "Emotions experienced today: " + emotionList.join(", ") + ".\n\n";
+
+  if (sleepInput < 5) {
+    summary += "It seems your sleep duration is quite low. Try to get more rest.\n";
+  } else if (sleepInput > 9) {
+    summary += "Sleeping too long can sometimes indicate fatigue or stress.\n";
+  } else {
+    summary += "Your sleep hours appear to be within a healthy range.\n";
+  }
+
+  if (selectedStress.value.toLowerCase() === "high") {
+    summary += "Your stress level is high. Consider practicing relaxation techniques or taking breaks.\n";
+  }
+
+  document.getElementById("wellnessSummary").value = summary;
+}
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
